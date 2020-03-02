@@ -14,5 +14,8 @@ namespace Lex
         {
         }
 
+        public LangException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

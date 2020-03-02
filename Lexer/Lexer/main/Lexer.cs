@@ -30,7 +30,7 @@ namespace Lex
                 prevMatches.AddRange(matches);
                 matches.Clear();
 
-                if(inputString[i] != ' ')
+                //if(inputString[i] != ' ')
                     currentString += inputString[i];
 
                 Console.WriteLine(currentString+ "\n");
@@ -38,43 +38,38 @@ namespace Lex
                 {
                     if (Regex.IsMatch(currentString, l.regexp))
                     {
-                        Console.WriteLine(l.ToString() + " found");
+                        //Console.WriteLine(l.ToString() + " found");
                         matches.Add(new Token(l, currentString));
                     }
-                    else
-                        Console.WriteLine(l.ToString() + " isn't found");
+                  //  else
+                       // Console.WriteLine(l.ToString() + " isn't found");
                 }
 
                 if (matches.Count <= 0)
                 {
-                    if (prevMatches.Count == 1)
-                    {
-                        result.Add(prevMatches[0]);
-                        currentString = String.Empty;
+                    result.Add(prevMatches[0]);
+                    if (inputString[i] != ' ')
                         i--;
-                        Console.WriteLine("\t\t\t\t" + prevMatches[0].lexem + "  (" + prevMatches[0].value + ")");
-                    }
-                    else
-                        throw new LangException("Too much Lexem found");
+                    currentString = String.Empty;
+
+                    Console.WriteLine("\t\t\t\t" + prevMatches[0].lexem + "  (" + prevMatches[0].value + ")");
+                    
+                    
                 }
 
                 // Если строка кончилась 
                 if(i == inputString.Length-1 || inputString[i] == '\n' )
                 {
-                    if (matches.Count == 1)
-                    {
                         result.Add(matches[0]);
-                        currentString = String.Empty;
-                        
-                    }
-                    else
-                        throw new LangException("Too much Lexem found");
+                        currentString = String.Empty;   
                 }
+
+                
                 
                 Console.WriteLine();
             }
 
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\n\n" + inputString);
             foreach(var t in result)
             {
                 Console.WriteLine(t.value+ "\t(" + t.lexem+")");

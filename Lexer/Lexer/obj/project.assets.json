@@ -694,11 +694,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Khan\\Desktop\\Lexer\\Lexer\\Lex.csproj",
+      "projectUniqueName": "C:\\Users\\Khan\\source\\repos\\mirea\\SPO2020\\Lexer\\Lexer\\Lex.csproj",
       "projectName": "Lex",
-      "projectPath": "C:\\Users\\Khan\\Desktop\\Lexer\\Lexer\\Lex.csproj",
+      "projectPath": "C:\\Users\\Khan\\source\\repos\\mirea\\SPO2020\\Lexer\\Lexer\\Lex.csproj",
       "packagesPath": "C:\\Users\\Khan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Khan\\Desktop\\Lexer\\Lexer\\obj\\",
+      "outputPath": "C:\\Users\\Khan\\source\\repos\\mirea\\SPO2020\\Lexer\\Lexer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -9,3 +9,14 @@ C:\Users\Khan\Desktop\Lexer\Lexer\bin\Debug\netcoreapp2.1\Lex.dll
 C:\Users\Khan\Desktop\Lexer\Lexer\bin\Debug\netcoreapp2.1\Lex.pdb
 C:\Users\Khan\Desktop\Lexer\Lexer\obj\Debug\netcoreapp2.1\Lex.dll
 C:\Users\Khan\Desktop\Lexer\Lexer\obj\Debug\netcoreapp2.1\Lex.pdb
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\bin\Debug\netcoreapp2.1\Lex.deps.json
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\bin\Debug\netcoreapp2.1\Lex.runtimeconfig.json
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\bin\Debug\netcoreapp2.1\Lex.runtimeconfig.dev.json
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\bin\Debug\netcoreapp2.1\Lex.dll
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\bin\Debug\netcoreapp2.1\Lex.pdb
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\obj\Debug\netcoreapp2.1\Lex.csprojAssemblyReference.cache
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\obj\Debug\netcoreapp2.1\Lex.csproj.CoreCompileInputs.cache
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\obj\Debug\netcoreapp2.1\Lex.AssemblyInfoInputs.cache
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\obj\Debug\netcoreapp2.1\Lex.AssemblyInfo.cs
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\obj\Debug\netcoreapp2.1\Lex.dll
+C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Lexer\obj\Debug\netcoreapp2.1\Lex.pdb
