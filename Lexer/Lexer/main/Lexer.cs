@@ -30,7 +30,7 @@ namespace Lex
                 prevMatches.AddRange(matches);
                 matches.Clear();
 
-                //if(inputString[i] != ' ')
+                if(inputString[i] != ' ')
                     currentString += inputString[i];
 
                 Console.WriteLine(currentString+ "\n");
@@ -38,42 +38,43 @@ namespace Lex
                 {
                     if (Regex.IsMatch(currentString, l.regexp))
                     {
-                        //Console.WriteLine(l.ToString() + " found");
+                       // Console.WriteLine(l.ToString() + " found");
                         matches.Add(new Token(l, currentString));
                     }
-                  //  else
-                       // Console.WriteLine(l.ToString() + " isn't found");
+                    //else
+                       //Console.WriteLine(l.ToString() + " isn't found");
                 }
 
                 if (matches.Count <= 0)
                 {
-                    result.Add(prevMatches[0]);
-                    if (inputString[i] != ' ')
-                        i--;
-                    currentString = String.Empty;
+                    if (prevMatches.Count > 0)
+                    {
+                        result.Add(prevMatches[0]);
+                        if (inputString[i] != ' ')
+                            i--;
+                        currentString = String.Empty;
 
-                    Console.WriteLine("\t\t\t\t" + prevMatches[0].lexem + "  (" + prevMatches[0].value + ")");
-                    
-                    
+                        Console.WriteLine("\t\t\t\t" + prevMatches[0].lexem + "  (" + prevMatches[0].value + ")");
+                    }
                 }
+                Console.WriteLine();
 
                 // Если строка кончилась 
-                if(i == inputString.Length-1 || inputString[i] == '\n' )
+                if (i == inputString.Length - 1 || inputString[i] == '\n')
                 {
-                        result.Add(matches[0]);
-                        currentString = String.Empty;   
+                    result.Add(matches[0]);
+                    currentString = String.Empty;
                 }
 
-                
-                
-                Console.WriteLine();
+
             }
 
-            Console.WriteLine("\n\n" + inputString);
+            Console.WriteLine("\n\n" + inputString + "\n");
             foreach(var t in result)
             {
                 Console.WriteLine(t.value+ "\t(" + t.lexem+")");
             }
+            Console.WriteLine();
             return result;
         }
 

@@ -50,31 +50,78 @@ namespace Lex
             {
                 assignExpr();
             }
-            catch(LangException e)
+            catch (LangException ex)
             {
                 try
                 {
                     iterator--;
                     ifExpr();
-                    Console.WriteLine("\tIF_EXPR");
-                    
-                }
-                catch(LangException ex)
+                }catch(LangException exc)
                 {
                     try
                     {
                         iterator--;
                         whileExpr();
-                        Console.WriteLine("\tWHILE_EXPR");
                     }
-                    catch(LangException exp)
+                    catch (LangException excep)
                     {
                         
-                       throw new LangException("AsEXP_excp " + e.Message + "|\nIfEXP_excp " + ex.Message + "|\nWhileEXP_excp " + exp.Message + "-> " + iterator);
+                        Console.WriteLine("\t\tНичего не подошло ->  " + (iterator-1));
+                        throw new LangException("Ничего не подошло");
                     }
                 }
             }
         }
+
+        private void assignExpr()
+        {
+            var();
+            assignOp();
+            valueExpr();
+
+        }
+
+        private void value()
+        {
+            try
+            {
+                var();
+            }
+            catch (LangException e)
+            {
+                try
+                {
+                    iterator--;
+                    digit();
+                }
+                catch (LangException ex)
+                {
+                    throw new LangException(e.Message + "|\n" + ex.Message + "-> " + iterator);
+                }
+            }
+
+        }
+
+        private void valueExpr()
+        {
+            value();
+            
+            try
+            {
+                while (true)
+                {
+                    op();
+                    value();
+                }   
+            }
+            catch (LangException e)
+            {
+                iterator--;
+                Console.WriteLine("\n\t\tvalue_exp\t" + e.Message + "-> " + iterator + "\n");
+            }
+            
+        }
+
 
         private void whileExpr()
         {
@@ -117,75 +164,9 @@ namespace Lex
 
         private void logicComp()
         {
-            compareVar();
-            compareOp();
-            compareVar();
-        }
-
-        private void compareVar()
-        {
-            try
-            {
-                value();
-            }catch(LangException e)
-            {
-                try
-                {
-                    iterator--;
-                    valueExpr();
-                }catch(LangException ex)
-                {
-                    throw new LangException(e.Message + "|\n" + ex.Message + "-> " + iterator);
-                }
-
-            }
-        }
-
-        private void assignExpr()
-        {
-            var();
-            assignOp();
             valueExpr();
-            
-        }
-
-        private void value()
-        {
-            try
-            {
-                var();
-            }
-            catch (LangException e)
-            {
-                try
-                {
-                    iterator--;
-                    digit();
-                }
-                catch (LangException ex)
-                {
-                    throw new LangException(e.Message + "|\n" + ex.Message + "-> " + iterator);
-                }
-            }
-
-        }
-        
-        private void valueExpr()
-        {
-            value();
-            while (true)
-            {
-                try
-                {
-                    op();
-                    value();
-                }
-                catch (LangException e)
-                { 
-                    Console.WriteLine("\tASSIGN_EXPR");
-                    throw new LangException(e.Message + "-> " + iterator);
-                }
-            }
+            compareOp();
+            valueExpr();
         }
 
         private void assignOp()
@@ -274,7 +255,7 @@ namespace Lex
             {
                 throw new LangException(requiredLexem.ToString() + " expected, but " + currentToken.lexem +"("+ currentToken.value + ") found -> " + iterator );
             }
-            Console.WriteLine(currentToken.lexem + " " + currentToken.value + " " + (iterator-1));
+            Console.WriteLine(currentToken.lexem + " " + currentToken.value + " -> " + (iterator-1));
         }
 
         private Token getNextToken()
@@ -286,9 +267,8 @@ namespace Lex
             }
             else
             {
-                iterator++;
                 Console.WriteLine("END");
-                throw new LangException("Out of Tokens -> " + iterator);
+                throw new OutOfTokensException("Out of Tokens -> " + iterator);
                 
             }
         }

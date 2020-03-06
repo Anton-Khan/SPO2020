@@ -25,7 +25,7 @@ while_expr -> WHILE_KW while_head while_body
 while_head -> L_B logic_comp R_B
 while_head -> L_SB expr+ R_SB
 
-logic_comp -> compare_var COMPARE_OP compare_var
+logic_comp -> value_expr COMPARE_OP value_expr
 compare_var -> value|value_expr
 
 
