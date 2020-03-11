@@ -1,20 +1,18 @@
-﻿lang -> expr+
-expr -> VAR ASSIGN_OP value_expr
-value_expr -> value (OP value)*
-value -> VAR|DIGIT
-
-
-VAR -> ^([a-zA-Z]+)$
-DIGIT -> ^(0|[1-9][0-9]*)$
-ASSIGN_OP -> ^=$
-OP -> ^(\+|-|\*|\/)$
+﻿
 
 
 	new	
 lang -> expr+
 expr -> assign_expr|if_expr|while_expr
 assign_expr -> VAR ASSIGN_OP value_expr
-value_expr -> value (OP value)*
+
+
+value_expr -> value (OP value)* | braket_expr
+braket_expr -> braket_body (OP braket_body)*
+braket_body -> L_B value_expr R_B
+
+
+
 value -> VAR|DIGIT
 
 if_expr -> IF_KW if_head if_body

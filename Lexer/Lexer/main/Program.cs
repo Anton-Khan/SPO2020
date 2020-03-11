@@ -11,7 +11,7 @@ namespace Lex
         {
 
 
-            Lexer lexer = new Lexer("if(12 > 4 * 3){asd = 12 while(test > 5 * 25){test = test + 12}}");//getCode(@"C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Code.TXT"));
+            Lexer lexer = new Lexer("while(12>1){a = 12");//getCode(@"C:\Users\Khan\source\repos\mirea\SPO2020\Lexer\Code.TXT"));
 
             Parser parser = new Parser(lexer.returnTokens());
             parser.lang();
