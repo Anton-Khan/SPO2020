@@ -4,16 +4,18 @@
 	new	
 lang -> expr+
 expr -> assign_expr|if_expr|while_expr
+
+
+
 assign_expr -> VAR ASSIGN_OP value_expr
 
 
-value_expr -> value (OP value)* | braket_expr
-braket_expr -> braket_body (OP braket_body)*
-braket_body -> L_B value_expr R_B
+value_expr -> value (OP value)* 
 
+bracket_body -> L_B value_expr R_B
 
+value -> VAR|DIGIT|bracket_body
 
-value -> VAR|DIGIT
 
 if_expr -> IF_KW if_head if_body
 if_head -> L_B logic_comp R_B
@@ -38,5 +40,4 @@ R_B -> ^\)$
 L_SB -> ^\{$
 R_SB -> ^\}$
 COMPARE_OP -> ^(>=|<=|>|<|!=|==)$
-
 

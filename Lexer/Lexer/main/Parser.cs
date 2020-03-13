@@ -38,10 +38,24 @@ namespace Lex
 
         public void lang()
         {
+
             while (true)
             {
                 expr();
             }
+
+            //try
+            //{
+            //    while (true)
+            //    {
+            //        expr();
+            //    }
+            //}
+            //catch(LangException e)
+            //{
+            //    Console.WriteLine(e.InnerException.Message);
+            //}
+
         }
 
         private void expr()
@@ -65,9 +79,9 @@ namespace Lex
                     }
                     catch (LangException excep)
                     {
-                        
-                        Console.WriteLine("\t\tНичего не подошло ->  " + (iterator-1));
-                        throw new LangException("Ничего не подошло");
+                        iterator--;
+                        Console.WriteLine("\t\tНичего не подошло в EXPR/OFT ->  " + (iterator - 1) + "\n\t\t\t" + ex.Message + "\n\t\t\t" + exc.Message + "\n\t\t\t" + excep.Message);
+                        throw new LangException("Ничего не подошло в EXPR/OFT ->" + (iterator - 1) + "\n\t\t\t" + ex.Message + "\n\t\t\t" + exc.Message + "\n\t\t\t" + excep.Message);
                     }
                 }
             }
@@ -96,7 +110,15 @@ namespace Lex
                 }
                 catch (LangException ex)
                 {
-                    throw new LangException(e.Message + "|\n" + ex.Message + "-> " + iterator);
+                    try
+                    {
+                        iterator--;
+                        bracketBody();
+                    }catch(LangException exc)
+                    {
+                        throw new LangException("Не обнаружилось ни VAR ни DIGIT ни (...) в VALUE -> " + (iterator - 1));
+                    }
+                    
                 }
             }
 
@@ -104,24 +126,43 @@ namespace Lex
 
         private void valueExpr()
         {
-            value();
             
+            value();
+
             try
             {
                 while (true)
                 {
                     op();
                     value();
-                }   
+                }
             }
             catch (LangException e)
             {
                 iterator--;
-                Console.WriteLine("\n\t\tvalue_exp\t" + e.Message + "-> " + iterator + "\n");
+                Console.WriteLine("\n\t\tvalue_exp\n\t\t\t" + (iterator - 1) + "-> " + e.Message + "\n");
+                return;
             }
+           
             
         }
+        /*
+         
+            value_expr -> value (OP value)* yes
+            
+            braket_body -> L_B value (op value)* R_B yes
+            
+            value -> VAR|DIGIT|braket_body yes
 
+         */
+
+
+        private void bracketBody()
+        {
+            leftB();
+            valueExpr();
+            rightB();
+        }
 
         private void whileExpr()
         {
@@ -239,12 +280,13 @@ namespace Lex
             {
                 try
                 {
-                    iterator--;
+                    //iterator--;
                     rightSb();                    
                 }
                 catch (LangException ex)
                 {
-                    throw new LangException(e.Message + "|\n" + ex.Message + "-> " + iterator);
+                    Console.WriteLine((iterator - 1) +  "-> Ожидалась {0}\n\t{1}", Lexem.R_SB, ex.Message);
+                    throw new LangException((iterator - 1) + "-> Ожидалась " + Lexem.R_SB+"\n\t" + ex.Message);
                 }
             }
         }
@@ -253,7 +295,7 @@ namespace Lex
         {
             if(currentToken.lexem != requiredLexem)
             {
-                throw new LangException(requiredLexem.ToString() + " expected, but " + currentToken.lexem +"("+ currentToken.value + ") found -> " + iterator );
+                throw new LangException(requiredLexem.ToString() + " expected, but " + currentToken.lexem +"("+ currentToken.value + ") found -> " + (iterator - 1));
             }
             Console.WriteLine(currentToken.lexem + " " + currentToken.value + " -> " + (iterator-1));
         }
@@ -268,7 +310,9 @@ namespace Lex
             else
             {
                 Console.WriteLine("END");
-                throw new OutOfTokensException("Out of Tokens -> " + iterator);
+                
+                iterator++;
+                throw new LangException("Out of Tokens -> " + (iterator - 1));
                 
             }
         }
